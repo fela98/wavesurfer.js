@@ -49,6 +49,8 @@ WaveSurfer.Regions = {
         this.wrapper.addEventListener('mousemove', function (e) {
             if (!drag) { return; }
 
+            console.log("Dragging");
+
             if (!region) {
                 region = my.add(params || {});
             }
@@ -156,21 +158,23 @@ WaveSurfer.Region = {
 
         /* Resize handles */
         if (this.resize) {
+            //Disabling the end dragging:
+            //Because one only should be able to drarg the start.
             var handleLeft = regionEl.appendChild(document.createElement('handle'));
             var handleRight = regionEl.appendChild(document.createElement('handle'));
             handleLeft.className = 'wavesurfer-handle wavesurfer-handle-start';
-            handleRight.className = 'wavesurfer-handle wavesurfer-handle-end';
+            //handleRight.className = 'wavesurfer-handle wavesurfer-handle-end';
             var css = {
                 cursor: 'col-resize',
                 position: 'absolute',
                 left: '0px',
                 top: '0px',
-                width: '1%',
+                width: '4px',
                 maxWidth: '4px',
                 height: '100%'
             };
             this.style(handleLeft, css);
-            this.style(handleRight, css);
+            //this.style(handleRight, css);
             this.style(handleRight, {
                 left: '100%'
             });
@@ -292,7 +296,7 @@ WaveSurfer.Region = {
                     if (e.target.classList.contains('wavesurfer-handle-start')) {
                         resize = 'start';
                     } else {
-                        resize = 'end';
+                        //resize = 'end';
                     }
                 } else {
                     drag = true;
